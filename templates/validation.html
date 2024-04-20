@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<main class="container" style="margin-top: 100px; margin-bottom: 56px;">
+  <h2 class="title">Validation</h2>
+  <hr>
+  <div class="container_vall">
+      <div class="validation">
+        {% if get_flashed_messages() %}
+            <header>
+                <div class="alert alert-danger mb-0 text-center" role="alert">
+                    {{ get_flashed_messages() | join(" ") }}
+                </div>
+            </header>
+        {% endif %}
+          <form action="/pay/{{ user_id }}" method="post">
+            <div class="bill">
+                <p>Bill :</p>
+                <p> <span id="initBill">{{"{:.2f}".format(Tot_Bill.TOT_bill)  }}</span> DH</p>
+            </div>
+            <div  class="bill">
+                <p>Your Cash :</p>
+                <p><span>{{"{:.2f}".format(Tot_Bill.Your_Cash) }}</span> DH</p>
+            </div>
+            <div class="bill">
+                <p>Your Bonus Cash :</p>
+                <p id="valMax"><span> {{"{:.2f}".format(Tot_Bill.cash_bonus) }} </span> DH</p>
+            </div>
+            <div style="margin-right: 0;" class="bill">
+                <p>Use your Bonus Cash :</p>
+                <div class="bill">
+                    <input class="range" name="range" max="{{Tot_Bill.TOT_bill}}" id="range" type="range">
+                    <p id="valBonusBill">{{0.00}} DH</p>
+                </div>
+            </div>
+            <hr class="validation_p">
+            <div class="validation_bill">
+                <div class="bill">
+                    <p>Total:</p>
+                    <p><span name="tot" id="tot">{{ "{:.2f}".format(Tot_Bill.TOT_bill - Tot_Bill.cash_bonus) }}</span> DH</p>
+                    <input type="hidden" name="tot" id="hidden_tot" value='{{ "{:.2f}".format(Tot_Bill.TOT_bill - Tot_Bill.cash_bonus) }}'>
+                </div>
+                <div class="btn_group">
+                    <button class="btn" type="submit">Pay</button>
+                    <a href="/add_to_cart" class="btn btn_cancel">Cancel</a>
+                </div>
+            </div>
+          </form>
+        </div>
+  </div>
+
+</main>
+{% endblock %}

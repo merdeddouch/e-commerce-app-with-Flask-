@@ -1,0 +1,42 @@
+{% if admin %}
+    {% extends 'admindashbord.html' %}
+{% else %}
+    {% extends 'base.html' %}
+{% endif %}
+
+{% block content %}
+  <main class="container" style="margin-top: 100px; margin-bottom: 56px;">
+    <h2 class="title">{{ category }} Products</h2>
+    <hr>
+    <div class="row  row-cols-sm-2 row-cols-md-2 row-cols-lg-4 g-3">
+    {% for product in prods %}
+    <div class="col {{product.category_id}}"  id="{{ product.P_id }}">
+      <div class="card shadow-sm">
+        <img class="bd-placeholder-img card-img-top " height="300" src="/{{ product.img_url }}" alt="">
+        <div class="card-body">
+          <h1 class="products_name">{{ product.name }}</h1>
+          <form action="/add_to_cart/{{ product.P_id }}" method="POST">
+          <p class="card-text Disctr">{{ product.description }}<span class="red">-{{ product.promo*100 }}%</span></p>
+          <div class="d-flex justify-content-between align-items-center">
+            <h3 class="products_price">{{ product.price_unit }} DH</h3>
+            <div class="col-auto">
+              <input type="number" class="form-control smaller-input" id="quantity-input" placeholder="Qty" name="qty" value="1" min="1">
+          </div>
+            <div>
+          {% if admin %}
+          <a href="/edit_product/{{ product.P_id }}" class="btn btn-sm btn-success">Edit</a>
+          {% else %}
+          <button type="submit" class="btn btn-sm btn-success">Add</button>
+          <a href="/add_to_wishlist/{{ product.P_id }}" class="btn btn-sm btn-danger">Like</a>
+          {% endif %}
+            </div>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  </main>
+
+{% endblock %}

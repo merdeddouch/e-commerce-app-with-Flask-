@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+  <main class="container" style="margin-top: 100px; margin-bottom: 56px;">
+    <h2 class="title">Cart</h2>
+    <hr>
+    {% if empty_cartt %}
+    <h2> empty cart </h2>
+    {% else %}
+    <div class="div_table">
+        <table>
+          <thead>
+              <th></th>
+              <th>Product name</th>
+              <th>Product qanutity</th>
+              <th>price/unit</th>
+              <th>promo</th>
+              <th>price/unit with promo</th>
+              <th>total price</th>
+              <th></th>
+          </thead>
+          <tbody>
+            {% for product in PorductsInCart %}
+              <tr>
+                  <td><img style="height: 50px; width: 50px;" src="/{{product.img_url}}" alt="{{product.name}}"></td>
+                  <td>{{product.name}}</td>
+                  <td>{{product.quantity}}</td>
+                  <td>{{product.price_unit}}DH</td>
+                  <td>-{{product.promo*100}}%</td>
+                  <td>{{"{:.2f}".format(product.price_unit * (1 - product.promo ))}}DH</td>
+                  <td>{{"{:.2f}".format(product.price_unit * (1 - product.promo ) * product.quantity) }}DH</td>
+                  <td><a href="/remove_from_cart/{{ product.P_id }}" class="btn btn-sm btn-danger">Remove</a></td>
+              </tr>
+              {% endfor %}
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td style="font-weight: bold">Total</td>
+                <td style="font-weight: bold">{{"{:.2f}".format(total_price) }}DH</td>
+                <!--    add user id and pay and add amout to admin and take amout from user and give himr 2% of all price        -->
+                <td><a href="/pay/{{ user_id }}" class="btn btn-sm btn-success" type="submit">Pay</a></td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+      </div>
+      {% endif %}
+  </main>
+
+{% endblock %}

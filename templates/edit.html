@@ -1,0 +1,47 @@
+{% extends 'admindashbord.html' %}
+
+
+{% block main %}
+
+<div class="container div_Add_products">
+    <div class="mb-3">
+    </div>
+
+    <form  class="block" action="/edit_product/{{ product.P_id }}" method="post" enctype="multipart/form-data">
+        <label class="singup" for="Add_products">edit products</label><br>
+        <img style="height: 90px; width: 90px; margin-bottom:20px;" src="/{{product.img_url}}" alt="{{product.name}}"></td>
+        <div class="mb-3">
+            <label class="labels" for="name">Product Name</label><br>
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="name" name="name" placeholder="name" value="{{ product.name }}"  type="text">
+        </div>
+        <div class="mb-3">
+            <label class="labels" for="name">Description</label><br>
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="Description" name="Description" value="{{ product.description }}" placeholder="Description" type="text">
+        </div>
+        <div class="mb-3">
+            <label class="labels" for="name">Category id</label><br>
+            <input type="number" class="form-control mx-auto w-auto" id="Category" name="Category" placeholder="Category" value="{{ product.category_id }}" required min="1" max = "5">
+        </div>
+        <div class="mb-3">
+            <label class="labels" for="name">Stock</label><br>
+            <input type="number" class="form-control mx-auto w-auto" id="stock" name="stock" placeholder="Quantity" value="{{ product.stock }}" required min="1">
+        </div>
+        <div class="mb-3">
+            <label class="labels" for="name">Price</label><br>
+            <input type="number" class="form-control mx-auto w-auto" id="price" name="price" placeholder="Price" value="{{ product.price_unit }}" step="0.01" required min="1">
+        </div>
+        <div class="mb-3">
+            <label class="labels" for="name">Product Image</label><br>
+            <input type="file" id="image" class="form-control mx-auto w-auto" name="image" value="{{product.img_url}}" accept="image/*" required>
+        </div>
+        <div class="mb-3">
+            <label class="labels" for="name">Promo</label>
+            <input type="number" class="form-control mx-auto w-auto" id="promo" name="promo" placeholder="Promo" value="{{ product.promo }}" step="0.01" required min="0" max="1">
+        </div>
+
+        <button class="btn btn1" type="submit">Add</button>
+    </form>
+
+</div>
+
+{% endblock %}

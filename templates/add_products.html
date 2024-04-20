@@ -1,0 +1,43 @@
+{% extends 'admindashbord.html' %}
+
+
+{% block main %}
+
+<div class="container div_Add_products">
+    <form  class="block" action="/add_products" method="post" enctype="multipart/form-data">
+        <label class="singup" for="Add_products">Add products</label>
+        <div class="mb-3">
+            <label class="labels" for="name">Product Name</label><br>
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="name" name="name" placeholder="name" type="text">
+        </div>
+        <div class="mb-3">
+            <label class="labels" for="name">Description</label><br>
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="Description" name="Description" placeholder="Description" type="text">
+        </div>
+        <div class="mb-3">
+            <label class="labels" for="name">Category id</label><br>
+            <input type="number" class="form-control mx-auto w-auto" id="Category" name="Category" placeholder="Category" required min="1" max = "5">
+        </div>
+        <div class="mb-3">
+            <label class="labels" for="name">Stock</label><br>
+            <input type="number" class="form-control mx-auto w-auto" id="stock" name="stock" placeholder="Quantity" required min="1">
+        </div>
+        <div class="mb-3">
+            <label class="labels" for="name">Price</label><br>
+            <input type="number" class="form-control mx-auto w-auto" id="price" name="price" placeholder="Price" step="0.01" required min="1">
+        </div>
+        <div class="mb-3">
+            <label class="labels" for="name">Product Image</label><br>
+            <input type="file" id="image" class="form-control mx-auto w-auto" name="image" accept="image/*" required>
+        </div>
+        <div class="mb-3">
+            <label class="labels" for="name">Promo</label>
+            <input type="number" class="form-control mx-auto w-auto" id="promo" name="promo" placeholder="Promo" step="0.01" required min="0" max="1">
+        </div>
+
+        <button class="btn btn1" type="submit">Add</button>
+    </form>
+
+</div>
+
+{% endblock %}

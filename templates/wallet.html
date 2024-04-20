@@ -1,0 +1,53 @@
+{% if admin %}
+    {% extends 'admindashbord.html' %}
+{% else %}
+    {% extends 'base.html' %}
+{% endif %}
+
+{% block content %}
+{% if admin %}
+<header>
+  <div style="margin-top:100px; z-index: 2;" class="alert alert-danger mb-0 text-center" role="alert">
+      {{ get_flashed_messages() | join(" ") }}
+  </div>
+</header>
+<div class="block wallet row">
+    <h1 class="cash" style="justify-content: center; color: green;">{{ user.name }}</h3>
+    <div class="col-md-12 justify-start">
+        <H2 class="cash"><span class="cash_title">CASH :</span> <span class="amount">{{ user.cash }}DH</span></H2>
+        <H2 class="cash"><span class="cash_title">Profits :</span> <span class="amount green">+ {{user.cash_bonus }}DH</span></H2>
+    </div>
+    <div class="col-md-12">
+      <form action="/wallet" method="POST">
+        <div class="mb-3">
+            <input autocomplete="off"  autofocus class="form-control mx-auto w-auto" id="cash" name="cash" placeholder="Amount" type="number" min="0" required>
+        </div>
+        <button class="btn btn-dark ADD_CASH" type="submit">Add Amount</button>
+    </form>
+    </div>
+  </div>
+
+{% else %}
+<header>
+  <div style="margin-top:100px; z-index: 2;" class="alert alert-danger mb-0 text-center" role="alert">
+      {{ get_flashed_messages() | join(" ") }}
+  </div>
+</header>
+<div class="block wallet row">
+    <h1 class="cash" style="justify-content: center; color: green;">{{ user.name }}</h3>
+    <div class="col-md-12 justify-start">
+        <H2 class="cash"><span class="cash_title">CASH :</span> <span class="amount">{{ user.cash }}DH</span></H2>
+        <H2 class="cash"><span class="cash_title">Bonus Cash :</span> <span class="amount green">+ {{user.cash_bonus }}DH</span></H2>
+    </div>
+    <div class="col-md-12">
+      <form action="/wallet" method="POST">
+        <div class="mb-3">
+            <input autocomplete="off"  autofocus class="form-control mx-auto w-auto" id="cash" name="cash" placeholder="Amount" type="number" min="0" required>
+        </div>
+        <button class="btn btn-dark ADD_CASH " type="submit">Add Amount</button>
+    </form>
+    </div>
+  </div>
+{% endif %}
+{% endblock %}
+

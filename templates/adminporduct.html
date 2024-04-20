@@ -1,0 +1,30 @@
+{% extends 'admindashbord.html' %}
+
+{% block main %}
+    <main class="container" style="margin-top: 100px; margin-bottom: 56px;">
+        <h2 class="title">All Products</h2>
+        <hr>
+        <div class="row  row-cols-sm-2 row-cols-md-2 row-cols-lg-4 g-3">
+        {% for product in Products %}
+        <div class="col {{product.category_id}}"  id="{{ product.P_id }}">
+        <div class="card shadow-sm">
+            <img class="bd-placeholder-img card-img-top " height="300" src="{{ product.img_url }}" alt="">
+            <div class="card-body">
+            <h1 class="products_name">{{ product.name }}</h1>
+            <p class="card-text Disctr">{{ product.description }}<span class="red">-{{ product.promo*100 }} %</span></p>
+            <div class="d-flex justify-content-between align-items-center">
+                <h3 class="products_price" >{{ product.price_unit }} DH</h3>
+                <div class="col-auto">
+                <input type="number" class="form-control smaller-input" id="quantity-input" disabled placeholder="Qty" value="{{ product.stock }}" min="1">
+            </div>
+                <div>
+                      <a href="/edit_product/{{ product.P_id }}" class="btn btn-sm btn-success">Edit</a>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+        {% endfor %}
+    </div>
+    </main>
+{% endblock %}
